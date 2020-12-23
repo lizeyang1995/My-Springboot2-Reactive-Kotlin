@@ -1,13 +1,14 @@
 package com.example.Myspringboot2reactivekotlin.data
 
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Primary
 import org.springframework.data.redis.core.ReactiveRedisTemplate
 import org.springframework.data.redis.serializer.StringRedisSerializer
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Mono
 import java.nio.ByteBuffer
 
-@Repository
+@Primary
 class RedisCounterRepository(private val redisTemplate: ReactiveRedisTemplate<String, String>,
                              @Value("\${redis.counter.key:THE_COUNTER}") keyName: String) : CounterRepository {
     private val key = ByteBuffer.wrap(StringRedisSerializer().serialize(keyName))
